@@ -11,6 +11,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import original.Range;
 
@@ -37,9 +39,14 @@ class DataUtilitiesTest {
 		when(invalidValue.getValue(0, 0)).thenReturn(null);
 	}
 
-	@Test
-	void testCalculateColumnTotal() {
-		assertEquals(13, DataUtilities.calculateColumnTotal(value, 2));
+	@ParameterizedTest
+	@CsvSource({
+		"9,0",
+		"13,1",
+		"5,2",
+		}) 
+	void testCalculateColumnTotal(int Expected, int Column) {
+		assertEquals(Expected, DataUtilities.calculateColumnTotal(value, Column));
 		verify(value, times(3)).getValue(anyInt(), anyInt());
 	}
 	@Test
@@ -82,5 +89,20 @@ class DataUtilitiesTest {
 	@Test
 	void testCreateNumberArrayNull() {
 		assertThrows(InvalidParameterException.class, () -> DataUtilities.createNumberArray(null));
+	}
+	
+	@ParameterizedTest
+	@CsvSource({
+		"8,0",
+		"6,1",
+		"13,2",
+		}) 
+	void testcalculateRowTotal(int expected, int row) { 
+		assertEquals(expected, DataUtilities.calculateRowTotal(value, row));
+		verify(value, times(3)).getValue(anyInt(), anyInt());
+	}
+	@Test
+	void testCalculateRowTotalNull() {
+		assertThrows(InvalidParameterException.class, () -> DataUtilities.calculateRowTotal(invalidValue, 0));
 	}
 }
