@@ -110,9 +110,9 @@ class DataUtilitiesTest {
 	@Test 
 	void createNumberArray2D2() {
 		double[][] list = new double [3][];
-		list[0] = new double[] {1.0, 2.5}; 
-		list[1] = new double[] {1.1, 2.1, 2.6}; 
-		list[2] = new double[] {1.4, 2.9, 4.2}; 
+		list[0] = new double[] {-1.0, -2.5}; 
+		list[1] = new double[] {-1.1, -2.1, -2.6}; 
+		list[2] = new double[] {-1.4, -2.9, -4.2}; 
 		
 		//verify
 		Number[][] actual = DataUtilities.createNumberArray2D(list);
