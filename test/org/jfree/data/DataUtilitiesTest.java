@@ -95,12 +95,12 @@ class DataUtilitiesTest {
 	//test number array 2D
 	@Test 
 	void createNumberArray2D() {
-		double[][] list = new double [2][];
-		list[0] = new double[] {1.0, 2.0, 2.5}; 
-		list[1] = new double[] {1.1, 2.1, 2.6, 3.3}; 
+		double[][] data = new double [2][];
+		data[0] = new double[] {1.0, 2.0, 2.5}; 
+		data[1] = new double[] {1.1, 2.1, 2.6, 3.3}; 
 		
 		//verify
-		Number[][] actual = DataUtilities.createNumberArray2D(list);
+		Number[][] actual = DataUtilities.createNumberArray2D(data);
 		assertEquals(2, actual.length);
 		assertEquals(3, actual[0].length);
 		assertEquals(4, actual[1].length);
@@ -109,20 +109,19 @@ class DataUtilitiesTest {
 	
 	@Test 
 	void createNumberArray2D2() {
-		double[][] list = new double [3][];
-		list[0] = new double[] {-1.0, -2.5}; 
-		list[1] = new double[] {-1.1, -2.1, -2.6}; 
-		list[2] = new double[] {-1.4, -2.9, -4.2}; 
+		double[][] data = new double [3][];
+		data[0] = new double[] {-1.0, -2.5}; 
+		data[1] = new double[] {-1.1, -2.1, -2.6}; 
+		data[2] = new double[] {-1.4, -2.9, -4.2}; 
 		
 		//verify
-		Number[][] actual = DataUtilities.createNumberArray2D(list);
+		Number[][] actual = DataUtilities.createNumberArray2D(data);
 		assertEquals(3, actual.length);
 		assertEquals(2, actual[0].length);
 		assertEquals(3, actual[1].length);
 		assertEquals(3, actual[2].length);
 		
 	}
-	
 	
 	//test the NULL method for createNumberArray2D
 	@Test
