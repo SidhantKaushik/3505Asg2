@@ -191,4 +191,15 @@ class RangeTest {
 		assertEquals(expected, actual);
 	}
 	
+	@ParameterizedTest
+	@CsvSource({
+		"0, 0, Range[0,0]",
+		"-3,2, Range[-3,2]",
+		"5,10, Range[5,10]"
+	})
+	void testToString(double lb1, double ub1, String expected) {
+		Range range1 = new Range(lb1, ub1);
+		String actual = range1.toString();
+		assertEquals(expected, actual);
+	}
 }
