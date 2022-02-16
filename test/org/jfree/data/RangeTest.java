@@ -202,4 +202,164 @@ class RangeTest {
 		String actual = range1.toString();
 		assertEquals(expected, actual);
 	}
+	
+	
+	//tests to find the central value between the range
+	@Test
+	void testGetCentralValue() {
+		exampleRange = new Range(-1, 1);
+		assertEquals(0, exampleRange.getCentralValue(),0.1d,"The central value of (-1,1) is 0");
+	}
+	
+	@Test
+	void testGetCentralValue2() {
+		exampleRange = new Range(1.0, 5.0);
+		assertEquals(3.0, exampleRange.getCentralValue(),0.1d,"The central value of (1.0,5.0) is 3.0");
+	}
+	
+	
+	//testing to return all the values on the specified range and contain the specified value
+	@Test
+	void testExpandToInclude() {
+		Range exampleRange = new Range(1, 3);
+		Range newRange = Range.expandToInclude(exampleRange, 2);
+		assertEquals(exampleRange, newRange);
+		
+	}
+	
+	@Test
+	void testExpandToIncludeNegative() {
+		Range exampleRange = new Range(-3, -1);
+		Range newRange = Range.expandToInclude(exampleRange, -2);
+		assertEquals(exampleRange, newRange);
+		
+	}
+	
+	
+	//testing for the length of the range using numbers, letters and null instances
+	@Test 
+	void testGetLength() {
+		double exampleRange = "1234567890".length();
+		double expectedLength = 10; 
+		assertEquals(exampleRange, expectedLength);
+	}
+	
+	@Test 
+	void testGetLengthCharacter() {
+		double exampleRange = "@#$%^&*".length();
+		double expectedLength = 7; 
+		assertEquals(exampleRange, expectedLength);
+	}
+	
+	void testGetLengthNull() {
+		double exampleRange = "1234567890".length();
+		String expectedLength = null; 
+		assertEquals(exampleRange, expectedLength);
+	}
+	
+	
+	//testing for the lower bound of the range using both positive and negative values 
+	@Test 
+	void testGetLowerBound() {
+		exampleRange = new Range(0.0, 10.0); 
+		assertEquals(exampleRange.getLowerBound(), 0.0, 10.0);
+		
+	}
+	
+	@Test 
+	void testGetLowerBound2() {
+		exampleRange = new Range(-10.0, 1.0); 
+		assertEquals(exampleRange.getLowerBound(), -10.0, 1.0);
+		
+	}
+	
+
+	//testing for the Upper bounds of the range using both positive and negative values 
+	@Test 
+	void testGetUpperBound() {
+		exampleRange = new Range(0.0, 100.0);
+		assertEquals(exampleRange.getUpperBound(), 0.0, 100.0);
+		
+	}
+	
+	@Test 
+	void testGetUpperBound2() {
+		exampleRange = new Range(-1.0, 1.0);
+		assertEquals(exampleRange.getUpperBound(), -1.0, 1.0);
+		
+	}
+	
+	
+	//testing for range if it intersected with the specified range and returns either false or true 
+	@Test 
+	void testIntersects() {
+		Range exampleRange = new Range(1, 5);
+		boolean outcome = exampleRange.intersects(7, 9);
+		assertTrue(!outcome);
+	}
+	
+	@Test 
+	void testIntersects2() {
+		Range exampleRange = new Range(2, 6);
+		boolean outcome = exampleRange.intersects(2, 6);
+		assertTrue(outcome);
+	}
+	
+	
+	//testing for right shift without zero crossing 
+	@Test 
+	void testShift() {
+		Range exampleRange = new Range(1.0, 5.0);
+		Range actual = Range.shift(exampleRange, 1.0);
+		Range expected = new Range(2.0, 6.0);
+		assertEquals(actual, expected);
+	}
+	
+	@Test 
+	void testShiftNegativeNumber() {
+		Range exampleRange = new Range(-5.0, -3.0);
+		Range actual = Range.shift(exampleRange, -2.0);
+		Range expected = new Range(-7.0, -5.0);
+		assertEquals(actual, expected);
+	}
+	
+	@Test 
+	void testShiftNull() {
+		Range exampleRange = new Range(1.0, 5.0);
+		Range actual = Range.shift(exampleRange, 1.0);
+		Range expected = new Range(2.0, 6.0);
+		
+		//verify for null 
+		boolean error = actual.equals(null);
+		assertEquals(error, expected);
+	}
+	
+	
+	//testing for right shift using zero crossing 
+	@Test
+	void testShiftZeroCrossing() {
+		Range exampleRange = new Range(1.0, 5.0);
+		Range actual = Range.shift(exampleRange, 1.0, true);
+		Range expected = new Range(2.0, 6.0);
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	void testShiftZeroCrossingNegativeNumber() {
+		Range exampleRange = new Range(-5.0, -3.0);
+		Range actual = Range.shift(exampleRange, -1.0, true);
+		Range expected = new Range(-6.0, -4.0);
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	void testShiftZeroCrossingNull() {
+		Range exampleRange = new Range(1.0, 5.0);
+		Range actual = Range.shift(exampleRange, 1.0, true);
+		Range expected = new Range(2.0, 6.0);
+		
+		//verify for null
+		boolean error = actual.equals(null); 
+		assertEquals(error, expected);
+	}
 }
