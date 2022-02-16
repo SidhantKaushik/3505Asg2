@@ -91,6 +91,45 @@ class DataUtilitiesTest {
 		assertThrows(InvalidParameterException.class, () -> DataUtilities.createNumberArray(null));
 	}
 	
+	
+	//test number array 2D
+	@Test 
+	void createNumberArray2D() {
+		double[][] list = new double [2][];
+		list[0] = new double[] {1.0, 2.0, 2.5}; 
+		list[1] = new double[] {1.1, 2.1, 2.6, 3.3}; 
+		
+		//verify
+		Number[][] actual = DataUtilities.createNumberArray2D(list);
+		assertEquals(2, actual.length);
+		assertEquals(3, actual[0].length);
+		assertEquals(4, actual[1].length);
+		
+	}
+	
+	@Test 
+	void createNumberArray2D2() {
+		double[][] list = new double [3][];
+		list[0] = new double[] {1.0, 2.5}; 
+		list[1] = new double[] {1.1, 2.1, 2.6}; 
+		list[2] = new double[] {1.4, 2.9, 4.2}; 
+		
+		//verify
+		Number[][] actual = DataUtilities.createNumberArray2D(list);
+		assertEquals(3, actual.length);
+		assertEquals(2, actual[0].length);
+		assertEquals(3, actual[1].length);
+		assertEquals(3, actual[2].length);
+		
+	}
+	
+	
+	//test the NULL method for createNumberArray2D
+	@Test
+	void createNumberArray2DNull() {
+		assertThrows(InvalidParameterException.class, () -> DataUtilities.createNumberArray2D(null));
+	}
+	
 	@ParameterizedTest
 	@CsvSource({
 		"8,0",
