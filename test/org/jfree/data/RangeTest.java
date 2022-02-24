@@ -15,6 +15,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import original.Range;
 
 class RangeTest {
+	private Range exampleRange;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
